@@ -38,9 +38,3 @@ The database schema was created in this task. The following design was finalized
 
 ![image](https://user-images.githubusercontent.com/69202269/224475120-df6c434d-1898-4b88-91d8-dfcc9687fb13.png)
 
-### Task 2 - Develop Backend Endpoints for Registration/Login
-
-In this task, the API endpoints for user login and signup were created. They are as follows:
-
-- [POST] /api/login
-- [POST] /api/signup
