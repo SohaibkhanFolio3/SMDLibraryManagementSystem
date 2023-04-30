@@ -52,6 +52,14 @@ The database schema was created in this task. The following design was finalized
 - [POST] /api/books/ - Add a book
 - [PUT] /api/books/{id} - Update a book
 - [DELETE] /api/books/{id} - Delete a book
+- [POST] /api/add_more_copies/ - Add more copies for a book
+
+### Task 4 - Create API endpoints for User (Issue/Return books)
+
+- [GET] /api/bookings - Get all bookings for logged in user
+- [GET] /api/bookings/{id} - Get a particular booking for logged in user
+- [POST] /api/bookings/ - Create a booking
+- [POST] /api/return_book/ - Return a book
 
 ## Admin Credentials
 
