@@ -65,7 +65,6 @@ class BookingsViewSet(ModelViewSet):
 def return_book(request):
 
     try:
-        print(request.body)
         book_id = int(json.loads(request.body).get("book_id"))
     except:
         return Response({"status": "error", "message": "No or invalid book_id"}, status=status.HTTP_400_BAD_REQUEST)
@@ -86,3 +85,29 @@ def return_book(request):
 
     return Response({"status": "success", "message": "Book successfully returned."}, status=status.HTTP_200_OK)
 
+
+@api_view(('POST', ))
+@renderer_classes((JSONRenderer, ))
+def add_more_copies(request):
+
+    try:
+        book_id = int(json.loads(request.body).get("book_id"))
+    except:
+        return Response({"status": "error", "message": "No or invalid book_id"}, status=status.HTTP_400_BAD_REQUEST)
+
+    try:
+        no_of_copies = int(json.loads(request.body).get("no_of_copies"))
+    except:
+        return Response({"status": "error", "message": "No or invalid no_of_copies"}, status=status.HTTP_400_BAD_REQUEST)
+    
+    if no_of_copies <= 0:
+        return Response({"status": "error", "message": "no_of_copies should be greater than 0"}, status=status.HTTP_400_BAD_REQUEST)
+    
+    try:
+        book = Book.objects.get(id=book_id)
+    except Book.DoesNotExist:
+        return Response({"status": "error", "message": "Book for given book_id does not exist."}, status=status.HTTP_400_BAD_REQUEST)
+    
+    book.quantity += no_of_copies
+    book.save()
+    return Response({"status": "success", "message": "Copies successfully added"}, status=status.HTTP_200_OK)

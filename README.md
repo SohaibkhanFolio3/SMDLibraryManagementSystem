@@ -20,6 +20,8 @@ python manage.py makemigrations
 python manage.py migrate
 ```
 
+requestuser
+
 - Run the following command to start the server
 
 ```
@@ -37,6 +39,19 @@ python manage.py runserver
 The database schema was created in this task. The following design was finalized after normalizations:
 
 ![image](https://user-images.githubusercontent.com/69202269/224475120-df6c434d-1898-4b88-91d8-dfcc9687fb13.png)
+
+### Task 2 - Create API endpoints for Login/Signup
+
+- [POST] /api/login
+- [POST] /api/signup
+
+### Task 3 - Create API endpoints for Book Management (only available for admin)
+
+- [GET] /api/books - Get all books
+- [GET] /api/books/{id} - Get a book
+- [POST] /api/books/ - Add a book
+- [PUT] /api/books/{id} - Update a book
+- [DELETE] /api/books/{id} - Delete a book
 
 ## Admin Credentials
 
