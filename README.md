@@ -45,7 +45,7 @@ The database schema was created in this task. The following design was finalized
 - [POST] /api/login
 - [POST] /api/signup
 
-### Task 3 - Create API endpoints for Book Management (only available for admin)
+### Task 3 - Create API endpoints for Book Management (only available for admin except get all books)
 
 - [GET] /api/books - Get all books
 - [GET] /api/books/{id} - Get a book
