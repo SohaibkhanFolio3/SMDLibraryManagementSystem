@@ -38,3 +38,9 @@ The database schema was created in this task. The following design was finalized
 
 ![image](https://user-images.githubusercontent.com/69202269/224475120-df6c434d-1898-4b88-91d8-dfcc9687fb13.png)
 
+## Admin Credentials
+
+Following are the admin credentials. Admin has the privilege to add/delete books.
+
+Email: edsheeran1234@gmail.com
+Password: edsheeran1234
