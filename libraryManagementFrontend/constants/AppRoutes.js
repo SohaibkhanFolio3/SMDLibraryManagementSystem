@@ -5,8 +5,9 @@ export default AppRoutes = {
   PICK: "Issue a Book",
   BILL: "Bill",
   DATETIME: "Pick a return Date and Time",
-  ADDWALLET: "Wallet",
-  VEHICLE: "Vehicle",
+  ADDCOPY: "Add a copy",
+  ADDBOOK: "Add a book",
   BOOKING: "Bookings",
   SHOWVEHICLE: "Show vehicles",
+  MANAGEBOOKS: "Manage your books",
 };

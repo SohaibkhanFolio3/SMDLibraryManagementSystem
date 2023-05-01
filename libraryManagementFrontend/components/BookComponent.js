@@ -33,9 +33,10 @@ const BookComponent = ({
                   backgroundColor: ColourConstants.PRIMARY_COLOUR,
                   padding: 10,
                   marginBottom: 5,
-                  marginLeft: "60%",
+                  marginLeft: "40%",
                   fontWeight: "bold",
-                  color: "#ccc",
+                  color: ColourConstants.SECONDARY_COLOUR,
+                  textAlign: "center",
                 }}
               >
                 {button.title}

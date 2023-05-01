@@ -3,16 +3,16 @@ import SignupScreen from "../screens/SignupScreen";
 import SelectDateScreen from "../screens/SelectDateScreen";
 import { NavigationContainer } from "@react-navigation/native";
 import AppRoutes from "../constants/AppRoutes";
-import WelcomScreen from "../screens/WelcomeScreen";
+import WelcomScreen from "../screens/ShowBooksScreen";
 import HomeScreen from "../screens/HomeScreen";
-import AddWalletScreen from "../screens/AddWalletScreen";
+import AddBookScreen from "../screens/AddBookScreen";
 import { useSelector, useDispatch } from "react-redux";
 import { userAutoLoggedIn } from "../store/actions/UserActions";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { useEffect } from "react";
-import AddVehicleScreen from "../screens/AddVehicleScreen";
-import BookingDetailsScreen from "../screens/BookingDetailsScreen";
-import ShowCarsScreen from "../screens/ShowCarsScreen";
+import ManageBookScreen from "../screens/ManageBookScreen";
+import ManageBooksScreen from "../screens/ManageBooksScreen";
+import ShowIssuedBooks from "../screens/ShowIssuedBooks";
 
 const Stack = createNativeStackNavigator();
 export default function MainNavigation() {
@@ -43,18 +43,19 @@ export default function MainNavigation() {
             component={SelectDateScreen}
           />
           <Stack.Screen
-            name={AppRoutes.ADDWALLET}
-            component={AddWalletScreen}
+            name={AppRoutes.MANAGEBOOKS}
+            component={ManageBooksScreen}
           />
+          <Stack.Screen name={AppRoutes.ADDCOPY} component={AddBookScreen} />
           <Stack.Screen
             name={AppRoutes.SHOWVEHICLE}
-            component={ShowCarsScreen}
+            component={ShowIssuedBooks}
           />
-          <Stack.Screen name={AppRoutes.VEHICLE} component={AddVehicleScreen} />
+          <Stack.Screen name={AppRoutes.ADDBOOK} component={ManageBookScreen} />
           <Stack.Screen name={AppRoutes.PICK} component={WelcomScreen} />
           <Stack.Screen
             name={AppRoutes.BOOKING}
-            component={BookingDetailsScreen}
+            component={ManageBooksScreen}
           />
         </Stack.Navigator>
       ) : (

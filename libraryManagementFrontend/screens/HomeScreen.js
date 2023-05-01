@@ -40,7 +40,7 @@ export default function HomeScreen({ navigation }) {
       <TouchableOpacity
         style={styles.loginBtn}
         onPress={() => {
-          navigation.navigate(AppRoutes.PICK);
+          navigation.navigate(AppRoutes.SHOWVEHICLE);
         }}
       >
         <Text style={styles.loginbuttonText}>Show Issued Books</Text>
@@ -48,7 +48,7 @@ export default function HomeScreen({ navigation }) {
       <TouchableOpacity
         style={styles.loginBtn}
         onPress={() => {
-          navigation.navigate(AppRoutes.ADDWALLET);
+          navigation.navigate(AppRoutes.MANAGEBOOKS);
         }}
       >
         <Text style={styles.loginbuttonText}>Manage Books</Text>

@@ -13,7 +13,7 @@ import componentstyles from "../components/componentstyles";
 import AppRoutes from "../constants/AppRoutes";
 import { useSelector } from "react-redux";
 
-export default function AddVehicle({ navigation }) {
+export default function ManageBookScreen({ navigation }) {
   const user = useSelector((state) => state.user.loggedInUser);
   const [vehicles, setVehicles] = useState([]);
   const [vehicleNumber, setVehicleNumber] = useState("");
@@ -55,27 +55,27 @@ export default function AddVehicle({ navigation }) {
     <View style={VehicleStyles.container}>
       <View style={styles.formContainer}>
         <Input
-          placeholder="Vehicle Registration Number"
+          placeholder="Enter Book Image URL"
           value={vehicleNumber}
           setValue={setVehicleNumber}
         />
         <Input
-          placeholder="Make"
+          placeholder="Enter Book Title"
           value={vehicleMake}
           setValue={setVehicleMake}
         />
         <Input
-          placeholder="Model"
+          placeholder="Enter Book Author"
           value={vehicleModel}
           setValue={setVehicleModel}
         />
         <Input
-          placeholder="Year"
+          placeholder="Enter Book Quantity"
           value={vehicleYear}
           setValue={setVehicleYear}
         />
         <Input
-          placeholder="Colour"
+          placeholder="Enter Book Category"
           value={vehicleColor}
           setValue={setVehicleColor}
         />
@@ -83,7 +83,7 @@ export default function AddVehicle({ navigation }) {
           style={VehicleStyles.addButton}
           onPress={handleAddVehicle}
         >
-          <Text style={VehicleStyles.addButtonText}>Add Vehicle</Text>
+          <Text style={VehicleStyles.addButtonText}>Add Book</Text>
         </TouchableOpacity>
       </View>
     </View>

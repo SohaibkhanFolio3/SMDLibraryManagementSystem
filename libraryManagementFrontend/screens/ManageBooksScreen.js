@@ -1,15 +1,31 @@
 import React from "react";
-import { View, StyleSheet, FlatList, Text, Image } from "react-native";
+import {
+  View,
+  StyleSheet,
+  FlatList,
+  Text,
+  Image,
+  TouchableOpacity,
+} from "react-native";
 import BookComponent from "../components/BookComponent";
 import AppRoutes from "../constants/AppRoutes";
 import componentstyles from "../components/componentstyles";
 import ColourConstants from "../constants/ColourConstants";
 
-const WelcomeScreen = ({ navigation }) => {
+const ShowBooksScreen = ({ navigation }) => {
   const buttons = [
     {
-      title: "Issue Now",
-      onPress: () => navigation.navigate(AppRoutes.DATETIME),
+      title: "Delete Book",
+      onPress: () => {},
+    },
+    {
+      title: "Add More Copies",
+      onPress: (item) => {
+        navigation.navigate(AppRoutes.ADDCOPY, {
+          quantity: item.quantity,
+          title: item.title,
+        });
+      },
     },
   ];
 
@@ -63,6 +79,14 @@ const WelcomeScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
+      <TouchableOpacity
+        style={bookStyles.addButton}
+        onPress={() => {
+          navigation.navigate(AppRoutes.ADDBOOK);
+        }}
+      >
+        <Text style={bookStyles.addButtonText}>Add Book</Text>
+      </TouchableOpacity>
       <FlatList
         data={data}
         keyExtractor={(item) => item.id}
@@ -73,7 +97,10 @@ const WelcomeScreen = ({ navigation }) => {
             author={item.author}
             quantity={item.quantity}
             category={item.category}
-            buttons={buttons}
+            buttons={buttons.map((button) => ({
+              ...button,
+              onPress: () => button.onPress(item),
+            }))}
           />
         )}
         showsVerticalScrollIndicator={false}
@@ -98,4 +125,89 @@ const styles = StyleSheet.create({
   },
 });
 
-export default WelcomeScreen;
+export default ShowBooksScreen;
+
+const bookStyles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: ColourConstants.BACKGROUND_COLOUR,
+  },
+  inputContainer: {
+    width: "90%",
+    marginBottom: 20,
+    padding: 10,
+    borderRadius: 10,
+    backgroundColor: ColourConstants.SECONDARY_COLOUR,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+    marginTop: "15%",
+  },
+  textInput: {
+    height: 40,
+    borderColor: "gray",
+    borderWidth: 1,
+    marginBottom: 10,
+    borderRadius: 5,
+    paddingHorizontal: 10,
+  },
+  addButton: {
+    backgroundColor: ColourConstants.PRIMARY_COLOUR,
+    padding: 10,
+    borderRadius: 50,
+    alignItems: "center",
+    marginTop: 30,
+    marginBottom: 50,
+  },
+  addButtonText: {
+    color: "#fff",
+    fontWeight: "bold",
+  },
+  noVehiclesText: {
+    marginTop: 20,
+    fontSize: 16,
+    color: "#999",
+  },
+  vehicleContainer: {
+    width: "90%",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginBottom: 10,
+    backgroundColor: "#fff",
+    padding: 10,
+    borderRadius: 5,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+    marginTop: 25,
+  },
+  vehicleDetailsContainer: {
+    width: "70%",
+  },
+  vehicleText: {
+    fontSize: 16,
+  },
+  deleteButton: {
+    backgroundColor: ColourConstants.PRIMARY_COLOUR,
+    padding: 10,
+    borderRadius: 5,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  deleteButtonText: {
+    color: "#fff",
+    fontWeight: "bold",
+  },
+});

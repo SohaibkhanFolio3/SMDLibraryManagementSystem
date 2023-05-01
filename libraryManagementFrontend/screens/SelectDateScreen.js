@@ -1,13 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-  View,
-  Text,
-  Button,
-  StyleSheet,
-  TouchableOpacity,
-  Picker,
-  LogBox,
-} from "react-native";
+import { View, Text, Button, StyleSheet, TouchableOpacity } from "react-native";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import StringConstants from "../constants/StringConstants";
 import componentstyles from "../components/componentstyles";
@@ -17,41 +9,26 @@ import { useSelector } from "react-redux";
 import Car from "../api/Car";
 import { formatVehicle } from "../utils";
 
-export default function SelectDateScreen({ navigation }) {
-  LogBox.ignoreLogs([
-    "Non-serializable values were found in the navigation state",
-  ]);
-  const [startDateTime, setStartDateTime] = useState(null);
+export default function SelectDateScreen({ navigation, route }) {
+  const { title } = route.params;
+  // LogBox.ignoreLogs([
+  //   "Non-serializable values were found in the navigation state",
+  // ]);
   const [endDateTime, setEndDateTime] = useState(null);
-  const [isStartPickerVisible, setIsStartPickerVisible] = useState(false);
   const [isEndPickerVisible, setIsEndPickerVisible] = useState(false);
   const [selectedVehicle, setSelectedVehicle] = useState(null);
-  const [vehiclesData, setvehiclesData] = useState([]);
-  const user = useSelector((state) => state.user.loggedInUser);
-  const loadCars = async () => {
-    try {
-      const carData = await Car.getCars(user.token);
-      setvehiclesData(carData);
-    } catch (error) {
-      alert(error);
-    }
-  };
-  useEffect(() => {
-    loadCars();
-  }, []);
-
-  const showStartPicker = () => {
-    setIsStartPickerVisible(true);
-  };
-
-  const hideStartPicker = () => {
-    setIsStartPickerVisible(false);
-  };
-
-  const handleStartPicker = (datetime) => {
-    setStartDateTime(datetime);
-    hideStartPicker();
-  };
+  // const user = useSelector((state) => state.user.loggedInUser);
+  // const loadCars = async () => {
+  //   try {
+  //     const carData = await Car.getCars(user.token);
+  //     setvehiclesData(carData);
+  //   } catch (error) {
+  //     alert(error);
+  //   }
+  // };
+  // useEffect(() => {
+  //   loadCars();
+  // }, []);
 
   const showEndPicker = () => {
     setIsEndPickerVisible(true);
@@ -67,81 +44,27 @@ export default function SelectDateScreen({ navigation }) {
   };
 
   const validateDateTime = () => {
-    if (!startDateTime || !endDateTime) {
-      alert("Please select start and end date and time");
-      return;
-    }
-
-    if (startDateTime >= endDateTime) {
-      alert("End date and time must be after start date and time");
-      return;
-    }
-    if (startDateTime < new Date()) {
-      alert("Start date and time cannot be in the past");
-      return;
-    }
     if (endDateTime < new Date()) {
-      alert("Start date and time cannot be in the past");
-      return;
-    }
-    if (!selectedVehicle) {
-      alert("Please select a vehicle");
+      alert("Date and Time cannot be in the past");
       return;
     }
 
     // Proceed to the next screen
     // ...
     navigation.navigate(AppRoutes.PICK, {
-      startDateTime,
       endDateTime,
-      selectedVehicle,
     });
   };
 
   return (
     <View style={styles.container}>
       <View style={styles.inputsContainer}>
-        <Text style={styles.label}>Select a Vehicle:</Text>
-        <PickerComponent
-          selectedValue={selectedVehicle}
-          onValueChange={(itemValue) => setSelectedVehicle(itemValue)}
-          style={pickerstyles.vehicleInput}
-          itemStyle={pickerstyles.pickerItem}
-        >
-          <PickerComponent.Item label="Select a vehicle" value={null} />
-          {vehiclesData.map((vehicle) => (
-            <PickerComponent.Item
-              key={vehicle.registration_number}
-              label={formatVehicle(vehicle)}
-              value={vehicle}
-            />
-          ))}
-        </PickerComponent>
+        <Text style={{ fontWeight: "bold", fontSize: 18 }}>
+          Book Title : {title}
+        </Text>
       </View>
-
       <View style={styles.inputsContainer}>
-        <Text style={styles.label}>Start Date and Time:</Text>
-        <TouchableOpacity
-          style={styles.dateTimeContainer}
-          onPress={showStartPicker}
-        >
-          <Text style={styles.dateTimeText}>
-            {startDateTime
-              ? startDateTime.toLocaleString()
-              : "Select date and time"}
-          </Text>
-        </TouchableOpacity>
-        <DateTimePickerModal
-          isVisible={isStartPickerVisible}
-          mode="datetime"
-          date={startDateTime ? startDateTime : new Date()}
-          onConfirm={handleStartPicker}
-          onCancel={hideStartPicker}
-        />
-      </View>
-
-      <View style={styles.inputsContainer}>
-        <Text style={styles.label}>End Date and Time:</Text>
+        <Text style={styles.label}>Select a Date and Time:</Text>
         <TouchableOpacity
           style={styles.dateTimeContainer}
           onPress={showEndPicker}
@@ -163,12 +86,7 @@ export default function SelectDateScreen({ navigation }) {
 
       <View style={styles.buttonContainer}>
         <Button
-          title="Cancel"
-          onPress={() => navigation.goBack()}
-          color={ColourConstants.PRIMARY_COLOUR}
-        />
-        <Button
-          title="Next"
+          title="Confirm Book Issue"
           color={ColourConstants.PRIMARY_COLOUR}
           onPress={validateDateTime}
         />
@@ -208,11 +126,11 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     flexDirection: "row",
-    justifyContent: "space-between",
+    justifyContent: "center",
     width: "100%",
   },
   inputsContainer: {
-    marginBottom: 16,
+    marginBottom: 64,
     alignItems: "center",
     margin: "5%",
   },
