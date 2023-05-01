@@ -30,7 +30,34 @@ python manage.py runserver
 
 ### React Native App
 
-- Yet to be implemented
+- Node version 16 or greater is required.
+- Start a new terminal (keep the python terminal running) and move to the frontend folder
+
+```
+cd libraryManagementFrontend
+```
+
+- Install dependencies
+
+```
+npm install
+```
+
+- Run the following command to get your computer's IP information, and copy the IPv4 address
+
+```
+ipconfig
+```
+
+- Open libraryManagementFrontend/.env and replace the IP address in BACKEND_URL. The BACKEND_URL should look something like this:
+  `http://192.168.0.100:8000`
+- Start the app server
+
+```
+npx expo start
+```
+
+- Install Expo app on your mobile and scan QR code shown on terminal
 
 ## Tasks Details
 
@@ -71,7 +98,6 @@ The database schema was created in this task. The following design was finalized
 ![image](https://user-images.githubusercontent.com/69202269/235446754-6adce89d-6549-4432-bfa2-8ea8e134f323.png)
 ![image](https://user-images.githubusercontent.com/69202269/235447021-4f4f5bec-ac54-492d-801f-2975087d99e7.png)
 
-
 ### Task 7 - Create Issue Book Screen
 
 ![image](https://user-images.githubusercontent.com/69202269/235446817-6ad74dcf-e548-4029-b4e9-5a12fe79d906.png)
@@ -80,12 +106,10 @@ The database schema was created in this task. The following design was finalized
 
 ![image](https://user-images.githubusercontent.com/69202269/235446847-777fe47d-3857-4867-9b2e-43656ed2b573.png)
 
-
 ### Task 9 - Create Manage Books Screens (only for admin)
 
 ![image](https://user-images.githubusercontent.com/69202269/235447041-5edddfe9-457a-4c9d-b7ee-9b30f11278b8.png)
 ![image](https://user-images.githubusercontent.com/69202269/235447103-3b8f293a-2b90-4bc9-963d-c4a64797abfb.png)
-
 
 ### Task 10 - Create Add Book Copies Screen (only for admin)
 
