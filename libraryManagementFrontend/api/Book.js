@@ -12,4 +12,12 @@ const deleteBook = async (book_id, auth_token) => {
   return await request("DELETE", `books/${book_id}/`, {}, auth_token);
 };
 
-export default { addBook, getBooks, deleteBook };
+const addMoreCopies = async (book_id, no_of_copies, auth_token) => {
+  return await request(
+    "POST",
+    "add_more_copies/",
+    { book_id, no_of_copies },
+    auth_token
+  );
+};
+export default { addBook, getBooks, deleteBook, addMoreCopies };

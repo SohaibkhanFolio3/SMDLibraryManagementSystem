@@ -13,12 +13,13 @@ import AppRoutes from "../constants/AppRoutes";
 import ColourConstants from "../constants/ColourConstants";
 import { useSelector } from "react-redux";
 import Book from "../api/Book";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useFo } from "react";
+import { useIsFocused } from "@react-navigation/native";
 
 const ShowBooksScreen = ({ navigation }) => {
   const user = useSelector((state) => state.user.loggedInUser);
   const [books, setBooks] = useState([]);
-
+  const isFocused = useIsFocused();
   const deleteOnPress = (book) => {
     Alert.alert("Are you sure?", "Are you sure you want to delete this book?", [
       {
@@ -49,8 +50,7 @@ const ShowBooksScreen = ({ navigation }) => {
       title: "Add More Copies",
       onPress: (item) => {
         navigation.navigate(AppRoutes.ADDCOPY, {
-          quantity: item.quantity,
-          title: item.title,
+          book: item,
         });
       },
     },
@@ -66,8 +66,10 @@ const ShowBooksScreen = ({ navigation }) => {
   };
 
   useEffect(() => {
-    loadBooks();
-  }, []);
+    if (isFocused) {
+      loadBooks();
+    }
+  }, [isFocused]);
 
   return (
     <View style={styles.container}>
