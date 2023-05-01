@@ -12,12 +12,11 @@ import styles from "./styles";
 import componentstyles from "../components/componentstyles";
 import AppLogo from "../components/AppLogo";
 import AppRoutes from "../constants/AppRoutes";
+import { useSelector } from "react-redux";
 
 export default function HomeScreen({ navigation }) {
   const dispatch = useDispatch();
-  const handleShowBookings = () => {
-    navigation.navigate(AppRoutes.BOOKING);
-  };
+  const user = useSelector((state) => state.user.loggedInUser);
 
   const handleLogout = () => {
     dispatch(logout());
@@ -45,14 +44,17 @@ export default function HomeScreen({ navigation }) {
       >
         <Text style={styles.loginbuttonText}>Show Issued Books</Text>
       </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.loginBtn}
-        onPress={() => {
-          navigation.navigate(AppRoutes.MANAGEBOOKS);
-        }}
-      >
-        <Text style={styles.loginbuttonText}>Manage Books</Text>
-      </TouchableOpacity>
+      {user.is_admin && (
+        <TouchableOpacity
+          style={styles.loginBtn}
+          onPress={() => {
+            navigation.navigate(AppRoutes.MANAGEBOOKS);
+          }}
+        >
+          <Text style={styles.loginbuttonText}>Manage Books</Text>
+        </TouchableOpacity>
+      )}
+
       <TouchableOpacity style={styles.loginBtn} onPress={handleLogout}>
         <Text style={styles.loginbuttonText}>Logout</Text>
       </TouchableOpacity>
