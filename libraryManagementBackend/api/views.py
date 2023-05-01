@@ -2,12 +2,15 @@ from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.authtoken.models import Token
 from rest_framework.response import Response
 from django.contrib.auth import get_user_model
-from .serializers import UserSerializer
 from rest_framework import generics
 from rest_framework.viewsets import ModelViewSet, mixins
 from rest_framework.permissions import AllowAny
-from .serializers import BookSerializer, BookingsSerializer
-
+from .models import Book, Bookings
+from .serializers import BookSerializer, BookingsSerializer, UserSerializer
+from rest_framework.decorators import api_view, renderer_classes
+from rest_framework.renderers import JSONRenderer
+import json
+from rest_framework import status
 
 class CustomAuthToken(ObtainAuthToken):
 
@@ -23,7 +26,7 @@ class CustomAuthToken(ObtainAuthToken):
             'email': user.email,
             'first_name': user.first_name,
             'last_name': user.last_name,
-            'is_staff': user.is_staff,
+            'is_admin': user.is_staff,
             'mobile': user.mobile
         })
 
@@ -33,3 +36,78 @@ class RegisterView(generics.CreateAPIView):
     queryset = User.objects.all()
     permission_classes = (AllowAny,)
     serializer_class = UserSerializer
+
+class UserViewSet(ModelViewSet):
+
+    User = get_user_model()
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+class BookViewSet(ModelViewSet):
+
+    serializer_class = BookSerializer
+    queryset = Book.objects.all()
+
+
+class BookingsViewSet(ModelViewSet):
+
+    serializer_class = BookingsSerializer
+
+    def get_queryset(self):
+        return Bookings.objects.filter(user=self.request.user)
+    
+    def perform_create(self, serializer):
+        return serializer.save(user=self.request.user)
+
+
+@api_view(('POST', ))
+@renderer_classes((JSONRenderer, ))
+def return_book(request):
+
+    try:
+        book_id = int(json.loads(request.body).get("book_id"))
+    except:
+        return Response({"status": "error", "message": "No or invalid book_id"}, status=status.HTTP_400_BAD_REQUEST)
+
+    try:
+        book = Book.objects.get(id=book_id)
+    except Book.DoesNotExist:
+        return Response({"status": "error", "message": "Book for given book_id does not exist."}, status=status.HTTP_400_BAD_REQUEST)
+    
+    try:
+        booking = Bookings.objects.get(user=request.user, book=book)
+    except Bookings.DoesNotExist:
+        return Response({"status": "error", "message": "Booking for given book_id does not exist."}, status=status.HTTP_400_BAD_REQUEST)
+
+    booking.delete()
+    book.quantity += 1
+    book.save()
+
+    return Response({"status": "success", "message": "Book successfully returned."}, status=status.HTTP_200_OK)
+
+
+@api_view(('POST', ))
+@renderer_classes((JSONRenderer, ))
+def add_more_copies(request):
+
+    try:
+        book_id = int(json.loads(request.body).get("book_id"))
+    except:
+        return Response({"status": "error", "message": "No or invalid book_id"}, status=status.HTTP_400_BAD_REQUEST)
+
+    try:
+        no_of_copies = int(json.loads(request.body).get("no_of_copies"))
+    except:
+        return Response({"status": "error", "message": "No or invalid no_of_copies"}, status=status.HTTP_400_BAD_REQUEST)
+    
+    if no_of_copies <= 0:
+        return Response({"status": "error", "message": "no_of_copies should be greater than 0"}, status=status.HTTP_400_BAD_REQUEST)
+    
+    try:
+        book = Book.objects.get(id=book_id)
+    except Book.DoesNotExist:
+        return Response({"status": "error", "message": "Book for given book_id does not exist."}, status=status.HTTP_400_BAD_REQUEST)
+    
+    book.quantity += no_of_copies
+    book.save()
+    return Response({"status": "success", "message": "Copies successfully added"}, status=status.HTTP_200_OK)

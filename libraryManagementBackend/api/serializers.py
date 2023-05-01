@@ -44,6 +44,32 @@ class BookSerializer(serializers.ModelSerializer):
 
 class BookingsSerializer(serializers.ModelSerializer):
 
+    book = BookSerializer(read_only=True)
+    book_id = serializers.SlugRelatedField(
+        slug_field="id", queryset=Book.objects.all(), write_only=True, allow_null=True)
+    user = UserSerializer(read_only=True)
+
+
     class Meta:
         model = Bookings
         fields = "__all__"
+
+    def create(self, validated_data):
+        book = validated_data.pop('book_id')
+        try:
+            booking = Bookings.objects.get(user=self.context['request'].user, book=book)
+            raise serializers.ValidationError({"status": "error", "message": "Booking for this book already exists"}, code=400)
+        except Bookings.DoesNotExist:
+            pass
+
+        if book.quantity < 1:
+            raise serializers.ValidationError({"status": "error", "message": "Book has no available copies."}, code=400)
+        
+        book.quantity -= 1
+        book.save()
+        booking = Bookings(
+            book=book,
+            **validated_data
+        )
+        booking.save()
+        return booking

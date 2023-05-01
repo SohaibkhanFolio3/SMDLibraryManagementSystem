@@ -20,6 +20,8 @@ python manage.py makemigrations
 python manage.py migrate
 ```
 
+requestuser
+
 - Run the following command to start the server
 
 ```
@@ -38,3 +40,30 @@ The database schema was created in this task. The following design was finalized
 
 ![image](https://user-images.githubusercontent.com/69202269/224475120-df6c434d-1898-4b88-91d8-dfcc9687fb13.png)
 
+### Task 2 - Create API endpoints for Login/Signup
+
+- [POST] /api/login
+- [POST] /api/signup
+
+### Task 3 - Create API endpoints for Book Management (only available for admin except get all books)
+
+- [GET] /api/books - Get all books
+- [GET] /api/books/{id} - Get a book
+- [POST] /api/books/ - Add a book
+- [PUT] /api/books/{id} - Update a book
+- [DELETE] /api/books/{id} - Delete a book
+- [POST] /api/add_more_copies/ - Add more copies for a book
+
+### Task 4 - Create API endpoints for User (Issue/Return books)
+
+- [GET] /api/bookings - Get all bookings for logged in user
+- [GET] /api/bookings/{id} - Get a particular booking for logged in user
+- [POST] /api/bookings/ - Create a booking
+- [POST] /api/return_book/ - Return a book
+
+## Admin Credentials
+
+Following are the admin credentials. Admin has the privilege to add/delete books.
+
+Email: edsheeran1234@gmail.com
+Password: edsheeran1234
