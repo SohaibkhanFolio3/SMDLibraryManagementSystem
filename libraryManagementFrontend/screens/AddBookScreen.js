@@ -10,7 +10,16 @@ export default function AddBookScreen({ navigation, route }) {
   const [newQuantity, setNewQuantity] = useState("");
   const user = useSelector((state) => state.user.loggedInUser);
 
+  function isInDesiredForm(str) {
+    var n = Math.floor(Number(str));
+    return n !== Infinity && String(n) === str && n > 0;
+  }
+
   const handleAddQuantity = async () => {
+    if (!isInDesiredForm(newQuantity)) {
+      alert("Please enter a valid number");
+      return;
+    }
     try {
       await Book.addMoreCopies(book.id, newQuantity, user.token);
       alert("Copies added successfully.");
