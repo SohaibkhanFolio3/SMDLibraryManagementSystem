@@ -61,6 +61,36 @@ The database schema was created in this task. The following design was finalized
 - [POST] /api/bookings/ - Create a booking
 - [POST] /api/return_book/ - Return a book
 
+### Task 5 - Create Login/Registration Screen
+
+![image](https://user-images.githubusercontent.com/69202269/235446651-67abf254-cd51-4511-8683-dee605379d57.png)
+![image](https://user-images.githubusercontent.com/69202269/235446671-a9226b9a-ea1b-405b-9732-aca6c8643bd0.png)
+
+### Task 6 - Create Home Screen (Different for user and admin)
+
+![image](https://user-images.githubusercontent.com/69202269/235446754-6adce89d-6549-4432-bfa2-8ea8e134f323.png)
+![image](https://user-images.githubusercontent.com/69202269/235447021-4f4f5bec-ac54-492d-801f-2975087d99e7.png)
+
+
+### Task 7 - Create Issue Book Screen
+
+![image](https://user-images.githubusercontent.com/69202269/235446817-6ad74dcf-e548-4029-b4e9-5a12fe79d906.png)
+
+### Task 8 - Create Show Issued Books Screen
+
+![image](https://user-images.githubusercontent.com/69202269/235446847-777fe47d-3857-4867-9b2e-43656ed2b573.png)
+
+
+### Task 9 - Create Manage Books Screens (only for admin)
+
+![image](https://user-images.githubusercontent.com/69202269/235447041-5edddfe9-457a-4c9d-b7ee-9b30f11278b8.png)
+![image](https://user-images.githubusercontent.com/69202269/235447103-3b8f293a-2b90-4bc9-963d-c4a64797abfb.png)
+
+
+### Task 10 - Create Add Book Copies Screen (only for admin)
+
+![image](https://user-images.githubusercontent.com/69202269/235447134-45eec9cb-8e50-4b08-8e1e-e8d093108597.png)
+
 ## Admin Credentials
 
 Following are the admin credentials. Admin has the privilege to add/delete books.
