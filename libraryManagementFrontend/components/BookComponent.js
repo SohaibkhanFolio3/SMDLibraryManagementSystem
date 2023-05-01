@@ -11,7 +11,9 @@ const BookComponent = ({
   buttons,
 }) => {
   return (
-    <View style={{ flexDirection: "row", marginBottom: 20 }}>
+    <View
+      style={{ flexDirection: "row", borderBottomWidth: 1, paddingBottom: 20 }}
+    >
       <Image
         source={{ uri: image }}
         style={{ width: 80, height: 120, marginRight: 10 }}

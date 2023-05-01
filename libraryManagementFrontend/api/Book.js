@@ -8,4 +8,8 @@ const getBooks = async (auth_token) => {
   return await request("GET", "books/", {}, auth_token);
 };
 
-export default { addBook, getBooks };
+const deleteBook = async (book_id, auth_token) => {
+  return await request("DELETE", `books/${book_id}/`, {}, auth_token);
+};
+
+export default { addBook, getBooks, deleteBook };

@@ -6,6 +6,7 @@ import {
   Text,
   Image,
   TouchableOpacity,
+  Alert,
 } from "react-native";
 import BookComponent from "../components/BookComponent";
 import AppRoutes from "../constants/AppRoutes";
@@ -17,10 +18,32 @@ import { useState, useEffect } from "react";
 const ShowBooksScreen = ({ navigation }) => {
   const user = useSelector((state) => state.user.loggedInUser);
   const [books, setBooks] = useState([]);
+
+  const deleteOnPress = (book) => {
+    Alert.alert("Are you sure?", "Are you sure you want to delete this book?", [
+      {
+        text: "No",
+        onPress: () => {},
+      },
+      {
+        text: "Yes",
+        onPress: () => deleteItemYesOnPress(book.id),
+      },
+    ]);
+  };
+
+  const deleteItemYesOnPress = async (book_id) => {
+    try {
+      await Book.deleteBook(book_id, user.token);
+      loadBooks();
+    } catch (error) {
+      console.log(error);
+    }
+  };
   const buttons = [
     {
       title: "Delete Book",
-      onPress: () => {},
+      onPress: deleteOnPress,
     },
     {
       title: "Add More Copies",

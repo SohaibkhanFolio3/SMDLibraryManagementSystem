@@ -8,6 +8,6 @@ export default AppRoutes = {
   ADDCOPY: "Add a copy",
   ADDBOOK: "Add a book",
   BOOKING: "Bookings",
-  SHOWVEHICLE: "Show vehicles",
+  SHOWVEHICLE: "Show Issued Books",
   MANAGEBOOKS: "Manage your books",
 };
