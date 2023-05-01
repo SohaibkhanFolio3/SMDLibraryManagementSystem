@@ -21,8 +21,8 @@ const BookComponent = ({
       <View style={{ flex: 1 }}>
         <Text style={{ fontWeight: "bold", fontSize: 18 }}>{title}</Text>
         <Text style={{ marginBottom: 5 }}>{author}</Text>
-        <Text style={{ marginBottom: 5 }}>Quantity: {quantity}</Text>
         <Text style={{ marginBottom: 5 }}>Category: {category}</Text>
+        <Text style={{ marginBottom: 5 }}>Quantity: {quantity}</Text>
         <View
           style={{
             flexDirection: "column",

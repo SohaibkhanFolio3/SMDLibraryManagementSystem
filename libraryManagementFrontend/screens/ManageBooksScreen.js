@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   listContentContainer: {
-    paddingBottom: 20,
+    paddingBottom: 50,
   },
   bookContainer: {
     flexDirection: "row",
