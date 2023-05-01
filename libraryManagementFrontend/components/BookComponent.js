@@ -1,8 +1,5 @@
 import React from "react";
 import { View, Text, Image } from "react-native";
-import ColourConstants from "../constants/ColourConstants";
-import styles from "../screens/styles";
-import componentstyles from "./componentstyles";
 import Button from "./Button";
 
 const BookComponent = ({
@@ -34,7 +31,7 @@ const BookComponent = ({
           }}
         >
           {buttons.map((button, index) => (
-            <Button text={button.title} onPress={button.onPress} />
+            <Button text={button.title} onPress={button.onPress} key={index} />
           ))}
         </View>
       </View>

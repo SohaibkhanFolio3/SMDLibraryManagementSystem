@@ -11,85 +11,76 @@ import ColourConstants from "../constants/ColourConstants";
 import componentstyles from "../components/componentstyles";
 import AppRoutes from "../constants/AppRoutes";
 import { useSelector } from "react-redux";
+import Book from "../api/Book";
 
 export default function ManageBookScreen({ navigation }) {
   const user = useSelector((state) => state.user.loggedInUser);
-  const [vehicles, setVehicles] = useState([]);
-  const [vehicleNumber, setVehicleNumber] = useState("");
-  const [vehicleMake, setVehicleMake] = useState("");
-  const [vehicleModel, setVehicleModel] = useState("");
-  const [vehicleYear, setVehicleYear] = useState("");
-  const [vehicleColor, setVehicleColor] = useState("");
+  const [cover_page_url, setCoverPageURL] = useState("");
+  const [title, setTitle] = useState("");
+  const [author, setAuthor] = useState("");
+  const [quantity, setQuantity] = useState("");
+  const [category, setCategory] = useState("");
 
-  const handleAddVehicle = async () => {
-    // if (
-    //   vehicleNumber !== "" &&
-    //   vehicleMake !== "" &&
-    //   vehicleModel !== "" &&
-    //   vehicleYear !== "" &&
-    //   vehicleColor !== ""
-    // ) {
-    //   try {
-    //     await Car.addCar(
-    //       {
-    //         registration_number: vehicleNumber,
-    //         make: vehicleMake,
-    //         model: vehicleModel,
-    //         year: vehicleYear,
-    //         color: vehicleColor,
-    //       },
-    //       user.token
-    //     );
-    //     alert("Car Added Successfuly");
-    //     navigation.navigate(AppRoutes.HOME);
-    //   } catch (error) {
-    //     alert(error);
-    //   }
-    // } else {
-    //   alert("All fields are required.");
-    // }
+  const handleAddBook = async () => {
+    if (title !== "" && author !== "" && quantity !== "" && category !== "") {
+      try {
+        await Book.addBook(
+          {
+            cover_page_url,
+            title,
+            author,
+            quantity,
+            category,
+          },
+          user.token
+        );
+        alert("Book Added Successfuly");
+        navigation.navigate(AppRoutes.HOME);
+      } catch (error) {
+        alert(error);
+      }
+    } else {
+      alert("All fields except Image URL are required.");
+    }
   };
 
   return (
-    <View style={VehicleStyles.container}>
+    <View style={BookStyles.container}>
       <View style={styles.formContainer}>
         <Input
           placeholder="Enter Book Image URL"
-          value={vehicleNumber}
-          setValue={setVehicleNumber}
+          value={cover_page_url}
+          setValue={setCoverPageURL}
         />
         <Input
           placeholder="Enter Book Title"
-          value={vehicleMake}
-          setValue={setVehicleMake}
+          value={title}
+          setValue={setTitle}
         />
         <Input
           placeholder="Enter Book Author"
-          value={vehicleModel}
-          setValue={setVehicleModel}
+          value={author}
+          setValue={setAuthor}
         />
         <Input
           placeholder="Enter Book Quantity"
-          value={vehicleYear}
-          setValue={setVehicleYear}
+          value={quantity}
+          setValue={setQuantity}
         />
         <Input
           placeholder="Enter Book Category"
-          value={vehicleColor}
-          setValue={setVehicleColor}
+          value={category}
+          setValue={setCategory}
         />
-        <TouchableOpacity
-          style={VehicleStyles.addButton}
-          onPress={handleAddVehicle}
-        >
-          <Text style={VehicleStyles.addButtonText}>Add Book</Text>
+        <TouchableOpacity style={BookStyles.addButton} onPress={handleAddBook}>
+          <Text style={BookStyles.addButtonText}>Add Book</Text>
         </TouchableOpacity>
       </View>
     </View>
   );
 }
 
-const VehicleStyles = StyleSheet.create({
+const BookStyles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
@@ -131,12 +122,12 @@ const VehicleStyles = StyleSheet.create({
     color: "#fff",
     fontWeight: "bold",
   },
-  noVehiclesText: {
+  noBooksText: {
     marginTop: 20,
     fontSize: 16,
     color: "#999",
   },
-  vehicleContainer: {
+  bookContainer: {
     width: "90%",
     flexDirection: "row",
     justifyContent: "space-between",
@@ -154,10 +145,10 @@ const VehicleStyles = StyleSheet.create({
     elevation: 5,
     marginTop: 25,
   },
-  vehicleDetailsContainer: {
+  bookDetailsContainer: {
     width: "70%",
   },
-  vehicleText: {
+  bookText: {
     fontSize: 16,
   },
   deleteButton: {
