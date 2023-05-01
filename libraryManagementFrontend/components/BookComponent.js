@@ -1,8 +1,9 @@
 import React from "react";
-import { View, Text, Image, TouchableOpacity } from "react-native";
+import { View, Text, Image } from "react-native";
 import ColourConstants from "../constants/ColourConstants";
 import styles from "../screens/styles";
 import componentstyles from "./componentstyles";
+import Button from "./Button";
 
 const BookComponent = ({
   image,
@@ -24,24 +25,16 @@ const BookComponent = ({
         <Text style={{ marginBottom: 5 }}>Quantity: {quantity}</Text>
         <Text style={{ marginBottom: 5 }}>Category: {category}</Text>
         <View
-          style={{ flexDirection: "column", justifyContent: "space-between" }}
+          style={{
+            flexDirection: "column",
+            justifyContent: "space-evenly",
+            alignItems: "flex-end",
+            marginRight: 20,
+            marginTop: 10,
+          }}
         >
           {buttons.map((button, index) => (
-            <TouchableOpacity key={index} onPress={button.onPress}>
-              <Text
-                style={{
-                  backgroundColor: ColourConstants.PRIMARY_COLOUR,
-                  padding: 10,
-                  marginBottom: 5,
-                  marginLeft: "40%",
-                  fontWeight: "bold",
-                  color: ColourConstants.SECONDARY_COLOUR,
-                  textAlign: "center",
-                }}
-              >
-                {button.title}
-              </Text>
-            </TouchableOpacity>
+            <Button text={button.title} onPress={button.onPress} />
           ))}
         </View>
       </View>

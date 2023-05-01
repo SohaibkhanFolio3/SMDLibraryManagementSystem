@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Car from "../api/Car";
 import {
   View,
   Text,
@@ -23,32 +22,32 @@ export default function ManageBookScreen({ navigation }) {
   const [vehicleColor, setVehicleColor] = useState("");
 
   const handleAddVehicle = async () => {
-    if (
-      vehicleNumber !== "" &&
-      vehicleMake !== "" &&
-      vehicleModel !== "" &&
-      vehicleYear !== "" &&
-      vehicleColor !== ""
-    ) {
-      try {
-        await Car.addCar(
-          {
-            registration_number: vehicleNumber,
-            make: vehicleMake,
-            model: vehicleModel,
-            year: vehicleYear,
-            color: vehicleColor,
-          },
-          user.token
-        );
-        alert("Car Added Successfuly");
-        navigation.navigate(AppRoutes.HOME);
-      } catch (error) {
-        alert(error);
-      }
-    } else {
-      alert("All fields are required.");
-    }
+    // if (
+    //   vehicleNumber !== "" &&
+    //   vehicleMake !== "" &&
+    //   vehicleModel !== "" &&
+    //   vehicleYear !== "" &&
+    //   vehicleColor !== ""
+    // ) {
+    //   try {
+    //     await Car.addCar(
+    //       {
+    //         registration_number: vehicleNumber,
+    //         make: vehicleMake,
+    //         model: vehicleModel,
+    //         year: vehicleYear,
+    //         color: vehicleColor,
+    //       },
+    //       user.token
+    //     );
+    //     alert("Car Added Successfuly");
+    //     navigation.navigate(AppRoutes.HOME);
+    //   } catch (error) {
+    //     alert(error);
+    //   }
+    // } else {
+    //   alert("All fields are required.");
+    // }
   };
 
   return (

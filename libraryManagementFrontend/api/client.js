@@ -6,6 +6,7 @@ export default request = async (method, endpoint, data, auth_token = null) => {
   if (auth_token) {
     headers.Authorization = "Token " + auth_token;
   }
+  console.log(BACKEND_URL);
   const res = await axios({
     method: method,
     url: BACKEND_URL + "/api/" + endpoint,

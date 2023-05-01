@@ -6,7 +6,6 @@ import componentstyles from "../components/componentstyles";
 import ColourConstants from "../constants/ColourConstants";
 import { Picker as PickerComponent } from "@react-native-picker/picker";
 import { useSelector } from "react-redux";
-import Car from "../api/Car";
 import { formatVehicle } from "../utils";
 
 export default function SelectDateScreen({ navigation, route }) {

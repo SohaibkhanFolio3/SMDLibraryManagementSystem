@@ -2,7 +2,6 @@ import React from "react";
 import { View, StyleSheet, FlatList, Text, Image } from "react-native";
 import BookComponent from "../components/BookComponent";
 import AppRoutes from "../constants/AppRoutes";
-import componentstyles from "../components/componentstyles";
 import ColourConstants from "../constants/ColourConstants";
 
 const ShowBooksScreen = ({ navigation, route }) => {
