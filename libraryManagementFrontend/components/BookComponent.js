@@ -9,6 +9,7 @@ const BookComponent = ({
   quantity,
   category,
   buttons,
+  returnDate,
 }) => {
   return (
     <View
@@ -22,7 +23,12 @@ const BookComponent = ({
         <Text style={{ fontWeight: "bold", fontSize: 18 }}>{title}</Text>
         <Text style={{ marginBottom: 5 }}>{author}</Text>
         <Text style={{ marginBottom: 5 }}>Category: {category}</Text>
-        <Text style={{ marginBottom: 5 }}>Quantity: {quantity}</Text>
+
+        {returnDate ? (
+          <Text style={{ marginBottom: 5 }}>Return Date: {returnDate}</Text>
+        ) : (
+          <Text style={{ marginBottom: 5 }}>Quantity: {quantity}</Text>
+        )}
         <View
           style={{
             flexDirection: "column",
