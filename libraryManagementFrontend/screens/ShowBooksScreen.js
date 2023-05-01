@@ -31,7 +31,7 @@ const ShowBooksScreen = ({ navigation, route }) => {
     {
       title: "Issue Now",
       onPress: (item) =>
-        navigation.navigate(AppRoutes.DATETIME, { title: item.title }),
+        navigation.navigate(AppRoutes.DATETIME, { book: item }),
     },
   ];
 

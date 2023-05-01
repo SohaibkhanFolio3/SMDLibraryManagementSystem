@@ -4,7 +4,7 @@ export default AppRoutes = {
   HOME: "Home",
   PICK: "Issue a Book",
   BILL: "Bill",
-  DATETIME: "Pick a return Date and Time",
+  DATETIME: "Pick a Return Date",
   ADDCOPY: "Add a copy",
   ADDBOOK: "Add a book",
   BOOKING: "Bookings",
